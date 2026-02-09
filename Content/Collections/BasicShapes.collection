@@ -3,3 +3,10 @@ Type:Static
 Guid:D35E9A97-4880-F549-6056-14B97E8A9ACF
 ParentGuid:00000000-0000-0000-0000-000000000000
 
+/Game/Modules/LevelPrototyping/Meshes/SM_ChamferCube.SM_ChamferCube
+/Game/Modules/LevelPrototyping/Meshes/SM_Cube.SM_Cube
+/Game/Modules/LevelPrototyping/Meshes/SM_Cylinder.SM_Cylinder
+/Game/Modules/LevelPrototyping/Meshes/SM_Plane.SM_Plane
+/Game/Modules/LevelPrototyping/Meshes/SM_QuarterCylinder.SM_QuarterCylinder
+/Game/Modules/LevelPrototyping/Meshes/SM_QuarterCylinderOuter.SM_QuarterCylinderOuter
+/Game/Modules/LevelPrototyping/Meshes/SM_Ramp.SM_Ramp
