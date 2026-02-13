@@ -4,13 +4,13 @@
 
 #include "CoreMinimal.h"
 #include "Blueprint/UserWidget.h"
-#include "MPBackKeyWidget.generated.h"
+#include "UMPMainDialogue.generated.h"
 
 /**
  * 
  */
 UCLASS()
-class INVENTORY_API MPBackKeyWidget : public UUserWidget
+class INVENTORY_API UMPMainDialogue : public UUserWidget
 {
 	GENERATED_BODY()
 	

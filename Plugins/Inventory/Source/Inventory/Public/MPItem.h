@@ -3,23 +3,16 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "Engine/DataAsset.h"
 
 #include "MPItem.generated.h"
 
 UCLASS()
-class INVENTORY_API AMPItem : public AActor
+class INVENTORY_API UMPItem : public UDataAsset
 {
 	GENERATED_BODY()
 
 public:
 	// Sets default values for this actor's properties
-	AMPItem();
-
-protected:
-	// Called when the game starts or when spawned
-	virtual void BeginPlay() override;
-
-public:
-	// Called every frame
-	virtual void Tick(float DeltaTime) override;
+	UMPItem();
 };

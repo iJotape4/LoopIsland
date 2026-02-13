@@ -1,11 +1,11 @@
-﻿/*#pragma once
+﻿#pragma once
 #include "CoreMinimal.h"
-#include "InventoryEventPayloads.generated.h"
+#include "MPInventoryEventPayloads.generated.h"
 
 enum class EInventoryMode : uint8;
 class UMPInventorySlot;
 class UMPItem;
-class AMPItemDropZone;
+class AMPKeyItemDropZone;
 
 USTRUCT()
 struct FInventoryToggle
@@ -40,7 +40,7 @@ USTRUCT()
 struct FMatchKeyItemEvent
 {
 	GENERATED_BODY()
-	AMPItemDropZone* DropZone;
+	AMPKeyItemDropZone* DropZone;
 };
 
 USTRUCT()
@@ -48,4 +48,4 @@ struct FItemDroppedEvent
 {
 	GENERATED_BODY()
 	UMPInventorySlot* InventorySlot;
-};*/
+};
