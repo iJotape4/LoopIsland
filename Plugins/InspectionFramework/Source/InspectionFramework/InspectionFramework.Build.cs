@@ -26,6 +26,7 @@ public class InspectionFramework : ModuleRules
 			new string[]
 			{
 				"Core",
+				"UMG",
 				// ... add other public dependencies that you statically link with here ...
 			}
 			);
@@ -38,6 +39,9 @@ public class InspectionFramework : ModuleRules
 				"Engine",
 				"Slate",
 				"SlateCore",
+				"Inventory",
+				"EventRouter",
+				"UIUtils",
 				// ... add private dependencies that you statically link with here ...	
 			}
 			);
@@ -46,7 +50,6 @@ public class InspectionFramework : ModuleRules
 		DynamicallyLoadedModuleNames.AddRange(
 			new string[]
 			{
-				// ... add any modules that your module loads dynamically here ...
 			}
 			);
 	}

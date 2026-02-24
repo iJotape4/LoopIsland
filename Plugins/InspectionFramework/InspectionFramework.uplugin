@@ -20,5 +20,19 @@
 			"Type": "Runtime",
 			"LoadingPhase": "Default"
 		}
+	],
+	"Plugins": [
+		{
+			"Name": "Inventory",
+			"Enabled": true
+		},
+		{
+			"Name": "EventRouter",
+			"Enabled": true
+		},
+		{
+			"Name": "UIUtils",
+			"Enabled": true
+		}
 	]
 }
