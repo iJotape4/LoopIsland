@@ -26,7 +26,8 @@ public class UIUtils : ModuleRules
 			new string[]
 			{
 				"Core",
-				"UMG"
+				"UMG",
+				"GameplayTags",
 				// ... add other public dependencies that you statically link with here ...
 			}
 			);
@@ -39,6 +40,7 @@ public class UIUtils : ModuleRules
 				"Engine",
 				"Slate",
 				"SlateCore",
+				"EventRouter",
 				// ... add private dependencies that you statically link with here ...	
 			}
 			);

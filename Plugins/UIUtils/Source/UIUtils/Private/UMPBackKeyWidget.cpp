@@ -3,3 +3,7 @@
 
 #include "UMPBackKeyWidget.h"
 
+void UMPBackKeyWidget::OnBackKeyPressed() const
+{
+	OnBackKeyPressedDelegate.Broadcast();
+}
