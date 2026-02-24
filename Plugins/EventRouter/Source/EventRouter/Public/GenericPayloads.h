@@ -9,3 +9,9 @@ struct FGenericUIDialogueEvent
 	FText Text;
 	float Duration= 4.0f;
 };
+
+USTRUCT()
+struct FDummyTestEvent
+{
+	GENERATED_BODY()	
+};

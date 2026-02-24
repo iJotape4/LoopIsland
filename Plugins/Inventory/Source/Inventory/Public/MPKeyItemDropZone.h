@@ -12,7 +12,7 @@
 class UBoxComponent;
 class UMPItem;
 
-UCLASS()
+UCLASS(Abstract)
 class INVENTORY_API AMPKeyItemDropZone : public AMPInteractableObject
 {
 	GENERATED_BODY()
