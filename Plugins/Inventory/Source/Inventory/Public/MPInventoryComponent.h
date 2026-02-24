@@ -53,17 +53,12 @@ public:
 	void RemoveItem(const FItemDroppedEvent& Event);
 	
 	bool HasItem(TArray<UMPItem*> ItemsToCheck) const;
-	void ToggleInventory();
+	virtual void ToggleInventory();
 	void ToggleInventory(const FInventoryToggle& Event);
-	void SlotSelected(const FSlotSelectedEvent& SlotSelectedEvent);
-
-	void RotateItem(const FInputActionValue& Value);
-	void CloseInspectView();
-
+	virtual void SlotSelected(const FSlotSelectedEvent& SlotSelectedEvent);
 	virtual void BeginDestroy() override;
-	void OnPointerDown(const FInputActionValue& Value);
-	void OnZoom(const FInputActionValue& InputActionValue);
-
+protected:
+	EInventoryMode InventoryMode = EInventoryMode::Default;
 private:
 	FDelegateHandle InventoryPickedUpHandle;
 	FDelegateHandle InventoryItemUpdatedHandle;
@@ -72,7 +67,6 @@ private:
 	FDelegateHandle InventorySlotSelectedHandle;
 	FDelegateHandle InventoryItemDroppedHandle;
 	
-	EInventoryMode InventoryMode = EInventoryMode::Default;
 
 	AMPKeyItemDropZone* CurrentDropZone = nullptr;
 };

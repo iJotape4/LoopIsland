@@ -25,34 +25,10 @@ void UMPInventoryComponent::PostInitProperties()
 	Super::PostInitProperties();
 }
 
-void UMPInventoryComponent::MatchKeyItemEvent(const FMatchKeyItemEvent& MatchKeyItemEvent)
-{
-	if (HasItem(MatchKeyItemEvent.DropZone->RequiredItems))
-	{
-		InventoryMode = EInventoryMode::MatchKeyItem;
-		CurrentDropZone = MatchKeyItemEvent.DropZone;
-		ToggleInventory();
-		
-		UEventRouterSubsystem::BroadcastEvent(this, UIDialogEventsTag, FGenericUIDialogueEvent{FText::FromString("It Seems I can put something here"), 10.0f});
-	}
-	else
-	{
-		UEventRouterSubsystem::BroadcastEvent(this, UIDialogEventsTag, FGenericUIDialogueEvent{FText::FromString("I do not have required item to match")});
-	}
-}
-
-void UMPInventoryComponent::UpdateItem(const FItemUpdatedEvent& ItemUpdatedEvent)
-{
-	Inventory.Remove(ItemUpdatedEvent.Item);
-	if (UMPItem* Item = ItemUpdatedEvent.Item->RemainingItemAfterInteraction)
-		Inventory.Add(Item);
-}
 
 void UMPInventoryComponent::BeginPlay()
 {
 	Super::BeginPlay();
-	// InspectItemActor = GetWorld()->SpawnActor<ATTInspectItem>(InspectItemClass);
-	// InspectItemActor->SetActorLocation (FVector(1000.0f,0.0f,0.0f) );
 	
 	InventoryPickedUpHandle = UEventRouterSubsystem::SubscribeToEvent<FItemPickedEvent>(
 		this, 
@@ -97,16 +73,6 @@ bool UMPInventoryComponent::HasItem(TArray<UMPItem*> ItemsToCheck) const
 
 void UMPInventoryComponent::ToggleInventory()
 {
-	// if (!InspectItemActor) return;
-	// if (InspectItemActor->IsInspecting())
-	// {
-	// 	CloseInspectView();
-	// }
-	// else
-	// {
-	// 	bInventoryOpen = !bInventoryOpen;
-	// 	UEventRouterSubsystem::BroadcastEvent(this, UIEventsTag, FInventoryToggle(bInventoryOpen));
-	// }
 	bInventoryOpen = !bInventoryOpen;
 	UEventRouterSubsystem::BroadcastEvent(this, UIEventsTag, FInventoryToggle(bInventoryOpen));
 }
@@ -118,11 +84,7 @@ void UMPInventoryComponent::ToggleInventory(const FInventoryToggle& Event)
 
 void UMPInventoryComponent::SlotSelected(const FSlotSelectedEvent& SlotSelectedEvent)
 {
-	if (InventoryMode == EInventoryMode::Default)
-	{
-		//InspectItemActor->InspectItem(SlotSelectedEvent.InventorySlot->GetItem());
-	}
-	else if (InventoryMode == EInventoryMode::MatchKeyItem)
+	 if (InventoryMode == EInventoryMode::MatchKeyItem)
 	{
 		UE_LOG(LogTemp, Warning, TEXT("Picking in TryDropItem:"));
 		if (CurrentDropZone->ReceiveItem(SlotSelectedEvent.InventorySlot->GetItem()))
@@ -134,35 +96,35 @@ void UMPInventoryComponent::SlotSelected(const FSlotSelectedEvent& SlotSelectedE
 	}
 }
 
-
-void UMPInventoryComponent::RotateItem(const FInputActionValue& Value)
+void UMPInventoryComponent::MatchKeyItemEvent(const FMatchKeyItemEvent& MatchKeyItemEvent)
 {
-	// if (!InspectItemActor->IsInspecting())
-	// 	return;
-	// InspectItemActor->RotateItem(Value.Get<FVector2D>()*3.0f);
+	if (HasItem(MatchKeyItemEvent.DropZone->RequiredItems))
+	{
+		InventoryMode = EInventoryMode::MatchKeyItem;
+		CurrentDropZone = MatchKeyItemEvent.DropZone;
+		ToggleInventory();
+		
+		UEventRouterSubsystem::BroadcastEvent(this, UIDialogEventsTag, FGenericUIDialogueEvent{FText::FromString("It Seems I can put something here"), 10.0f});
+	}
+	else
+	{
+		UEventRouterSubsystem::BroadcastEvent(this, UIDialogEventsTag, FGenericUIDialogueEvent{FText::FromString("I do not have required item to match")});
+	}
 }
 
-void UMPInventoryComponent::OnPointerDown(const FInputActionValue& Value)
+void UMPInventoryComponent::UpdateItem(const FItemUpdatedEvent& ItemUpdatedEvent)
 {
-	// if (!InspectItemActor->IsInspecting())
-	// 	return;
-	// InspectItemActor->CheckHitResult();
-}
-
-void UMPInventoryComponent::OnZoom(const FInputActionValue& InputActionValue)
-{
-	// if (!InspectItemActor->IsInspecting())
-	// 	return;
-	// InspectItemActor->Zoom(InputActionValue.Get<float>());
-}
-
-void UMPInventoryComponent::CloseInspectView()
-{
-	// InspectItemActor->CloseInspectWidget();
+	Inventory.Remove(ItemUpdatedEvent.Item);
+	if (UMPItem* Item = ItemUpdatedEvent.Item->RemainingItemAfterInteraction)
+		Inventory.Add(Item);
 }
 
 void UMPInventoryComponent::BeginDestroy()
 {
-	UEventRouterSubsystem::UnsubscribeFromEvent(this, "UI.Inventory", InventoryPickedUpHandle);
+	UEventRouterSubsystem::UnsubscribeFromEvent(this, UIEventsTag, InventoryPickedUpHandle);
+	UEventRouterSubsystem::UnsubscribeFromEvent(this, UIEventsTag, InventoryToggleHandle);
+	UEventRouterSubsystem::UnsubscribeFromEvent(this, UIEventsTag, InventoryMatchItemHandle);
+	UEventRouterSubsystem::UnsubscribeFromEvent(this, UIEventsTag, InventoryItemDroppedHandle);
+	UEventRouterSubsystem::UnsubscribeFromEvent(this, UIEventsTag, InventoryItemUpdatedHandle);
 	Super::BeginDestroy();
 }
