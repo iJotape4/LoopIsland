@@ -30,6 +30,9 @@ public:
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Config")
 	bool bAcceptsItems = true;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Config")
+	FGameplayTag UIDialogEventsTag = FGameplayTag::RequestGameplayTag("UI.Dialogs", false);
 	
 	// Sets default values for this actor's properties
 	AMPKeyItemDropZone();
@@ -53,7 +56,6 @@ protected:
 		ev.InitializeAs<TPayloadStruct>(Payload);
 		DispatchEvent_Implementation(ev);
 	}
-	
 
 private:
 	void DispatchEvent_Implementation(const FInstancedStruct& Payload);;

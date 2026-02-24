@@ -29,7 +29,7 @@ public:
 	FGameplayTag UIEventsTag = FGameplayTag::RequestGameplayTag("UI.Inventory", false);
 	
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Config")
-	FGameplayTag UIDialogueEventsTag = FGameplayTag::RequestGameplayTag("UI.Dialogues", false);
+	FGameplayTag UIDialogEventsTag = FGameplayTag::RequestGameplayTag("UI.Dialogs", false);
 	
 protected:
 	TArray<UMPItem*> Inventory;

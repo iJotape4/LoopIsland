@@ -5,6 +5,8 @@
 #include "MPKeyItemDropZone.h"
 
 #include "EventRouterSubsystem.h"
+#include "GenericPayloads.h"
+#include "MPItem.h"
 #include "Components/SphereComponent.h"
 
 AMPKeyItemDropZone::AMPKeyItemDropZone()
@@ -48,18 +50,22 @@ bool AMPKeyItemDropZone::ReceiveItem(const UMPItem* Item)
 				{
 					bAcceptsItems = false;
 					SphereComponent->SetCollisionProfileName(UCollisionProfile::NoCollision_ProfileName);
-					//UEventRouterSubsystem::BroadcastEvent(this, "UI.Dialogues", FGenericDialogueEvent{FText::FromString("Well done! GG WP")} );
+
+					//TODO: Localization System
+					UEventRouterSubsystem::BroadcastEvent(this, UIDialogEventsTag, FGenericUIDialogueEvent{FText::FromString("Well done! GG WP")} );
 					FinishPuzzle();
 				}
 				else
 				{
-					//UEventRouterSubsystem::BroadcastEvent(this, "UI.Dialogues", FGenericDialogueEvent{RequiredItem->DropOffSentence});
+					//TODO: Localization System
+					UEventRouterSubsystem::BroadcastEvent(this, UIDialogEventsTag, FGenericUIDialogueEvent{RequiredItem->DropOffSentence});
 				}
 				return true;
 			}
 			else
 			{
-				//UEventRouterSubsystem::BroadcastEvent(this, "UI.Dialogues", FGenericDialogueEvent{FText::FromString("This item doesn't seem to fit here.")});
+				//TODO: Localization System
+				UEventRouterSubsystem::BroadcastEvent(this, UIDialogEventsTag, FGenericUIDialogueEvent{FText::FromString("This item doesn't seem to fit here.")});
 			}
 		}
 	}
