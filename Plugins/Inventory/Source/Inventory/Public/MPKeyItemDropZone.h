@@ -3,12 +3,13 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "MPInteractableObject.h"
 #include "GameFramework/Actor.h"
 
 #include "MPKeyItemDropZone.generated.h"
 
 UCLASS()
-class INVENTORY_API AMPKeyItemDropZone : public AActor
+class INVENTORY_API AMPKeyItemDropZone : public AMPInteractableObject
 {
 	GENERATED_BODY()
 

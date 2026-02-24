@@ -25,6 +25,10 @@
 		{
 			"Name": "EventRouter",
 			"Enabled": true
+		},
+		{
+			"Name": "InteractionFramework",
+			"Enabled": true
 		}
 	]
 }
