@@ -4,22 +4,70 @@
 // Sets default values
 #include "MPKeyItemDropZone.h"
 
+#include "EventRouterSubsystem.h"
+#include "Components/SphereComponent.h"
+
 AMPKeyItemDropZone::AMPKeyItemDropZone()
 {
 	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
+	DropZoneMesh = CreateDefaultSubobject<UStaticMeshComponent>("DropZoneMesh");
+	RootComponent = DropZoneMesh;
+
+	SphereComponent->SetupAttachment(DropZoneMesh);
 }
 
-// Called when the game starts or when spawned
-void AMPKeyItemDropZone::BeginPlay()
+bool AMPKeyItemDropZone::Interact_Implementation(APawn* InstigatorPawn)
 {
-	Super::BeginPlay();
-	
+	if (!bAcceptsItems) return false;
+	return Super::Interact_Implementation(InstigatorPawn);
 }
 
-// Called every frame
-void AMPKeyItemDropZone::Tick(float DeltaTime)
+bool  AMPKeyItemDropZone::IsItemRequired(UMPItem* Item)
 {
-	Super::Tick(DeltaTime);
+	if (Item == nullptr) return false;
+	if (RequiredItems.Contains(Item)) return true;
+
+	return false;
 }
 
+bool AMPKeyItemDropZone::ReceiveItem(const UMPItem* Item)
+{
+	if (Item == nullptr) return false;
+
+	if (RequiredItems.Num() >= 0)
+	{
+		for (UMPItem* RequiredItem : RequiredItems)
+		{
+			if (Item == RequiredItem )
+			{
+				AcceptItem(RequiredItem);
+				RequiredItems.Remove(RequiredItem);
+
+				if (RequiredItems.Num()<=0)
+				{
+					bAcceptsItems = false;
+					SphereComponent->SetCollisionProfileName(UCollisionProfile::NoCollision_ProfileName);
+					//UEventRouterSubsystem::BroadcastEvent(this, "UI.Dialogues", FGenericDialogueEvent{FText::FromString("Well done! GG WP")} );
+					FinishPuzzle();
+				}
+				else
+				{
+					//UEventRouterSubsystem::BroadcastEvent(this, "UI.Dialogues", FGenericDialogueEvent{RequiredItem->DropOffSentence});
+				}
+				return true;
+			}
+			else
+			{
+				//UEventRouterSubsystem::BroadcastEvent(this, "UI.Dialogues", FGenericDialogueEvent{FText::FromString("This item doesn't seem to fit here.")});
+			}
+		}
+	}
+	//else
+	return false;
+}
+
+void AMPKeyItemDropZone::DispatchEvent_Implementation(const FInstancedStruct& Payload)
+{
+	UEventRouterSubsystem::BroadcastEvent(this, EventTopic, Payload);
+}
