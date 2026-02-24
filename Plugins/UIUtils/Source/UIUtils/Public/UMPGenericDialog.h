@@ -6,33 +6,33 @@
 #include "GameplayTagContainer.h"
 #include "GenericPayloads.h"
 #include "Blueprint/UserWidget.h"
-#include "UMPMainDialogue.generated.h"
+#include "UMPGenericDialog.generated.h"
 
 /**
  * 
  */
 UCLASS()
-class UIUTILS_API UMPMainDialogue : public UUserWidget
+class UIUTILS_API UMPGenericDialog : public UUserWidget
 {
 	GENERATED_BODY()
 	
 public:
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category="Config")
-	FGameplayTag DialoguesTag = FGameplayTag::RequestGameplayTag("UI.Dialogues", false);
+	FGameplayTag DialogsTag = FGameplayTag::RequestGameplayTag("UI.Dialogs", false);
 
 	virtual void NativeConstruct() override;
 	
 	UFUNCTION(BlueprintImplementableEvent)
-	FText SetDialogueText(const FText& InDialogueText);
+	FText SetDialogText(const FText& InDialogueText);
 	
 	void DisplayText(const FGenericUIDialogueEvent& DialogueEvent);
-	void CloseDialogue();
+	void CloseDialog();
 
 	virtual void NativeDestruct() override;
 	
 private:
-	FText DialogueText;
+	FText DialogText;
 	FTimerHandle TimerHandle;
 
-	FDelegateHandle DialogueEventHandle;
+	FDelegateHandle DialogEventHandle;
 };
