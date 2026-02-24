@@ -2,9 +2,9 @@
 
 using UnrealBuildTool;
 
-public class Inventory : ModuleRules
+public class InteractionFramework : ModuleRules
 {
-	public Inventory(ReadOnlyTargetRules Target) : base(Target)
+	public InteractionFramework(ReadOnlyTargetRules Target) : base(Target)
 	{
 		PCHUsage = ModuleRules.PCHUsageMode.UseExplicitOrSharedPCHs;
 		
@@ -26,9 +26,6 @@ public class Inventory : ModuleRules
 			new string[]
 			{
 				"Core",
-				"GameplayTags",
-				"UMG",
-				"InputCore"
 				// ... add other public dependencies that you statically link with here ...
 			}
 			);
@@ -41,9 +38,6 @@ public class Inventory : ModuleRules
 				"Engine",
 				"Slate",
 				"SlateCore",
-				"EventRouter",
-				"InteractionFramework",
-				"UIUtils"
 				// ... add private dependencies that you statically link with here ...	
 			}
 			);

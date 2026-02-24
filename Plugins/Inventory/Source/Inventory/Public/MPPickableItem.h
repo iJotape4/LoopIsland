@@ -3,24 +3,39 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "GameFramework/Actor.h"
+#include "MPInteractableObject.h"
 
 #include "MPPickableItem.generated.h"
 
+class UMPItem;
+
 UCLASS()
-class INVENTORY_API AMPPickableItem : public AActor
+class INVENTORY_API AMPPickableItem : public AMPInteractableObject
 {
 	GENERATED_BODY()
-
 public:
+	UStaticMeshComponent* StaticMeshComponent;
+	USkeletalMeshComponent* SkeletalMeshComponent;
 	// Sets default values for this actor's properties
 	AMPPickableItem();
 
 protected:
-	// Called when the game starts or when spawned
-	virtual void BeginPlay() override;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Config")
+	UMPItem* Item;
+	
+	virtual bool Interact_Implementation(APawn* InstigatorPawn) override;
 
-public:
-	// Called every frame
-	virtual void Tick(float DeltaTime) override;
+	UFUNCTION(CallInEditor, Category="Data")
+	void ApplyDataAsset();
+
+	virtual void OnConstruction(const FTransform& Transform) override;
+
+#if WITH_EDITORONLY_DATA
+	UPROPERTY(Transient)
+	UMPItem* LastSubscribedItem;
+#endif
+	
+#if WITH_EDITOR
+	virtual void PostEditChangeProperty(FPropertyChangedEvent& PropertyChangedEvent) override;
+#endif
 };
