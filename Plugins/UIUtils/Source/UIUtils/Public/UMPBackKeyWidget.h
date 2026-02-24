@@ -10,7 +10,7 @@
  * 
  */
 UCLASS()
-class INVENTORY_API UMPBackKeyWidget : public UUserWidget
+class UIUTILS_API UMPBackKeyWidget : public UUserWidget
 {
 	GENERATED_BODY()
 	

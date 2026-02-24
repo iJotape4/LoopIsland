@@ -10,7 +10,7 @@
  * 
  */
 UCLASS()
-class INVENTORY_API UMPMainDialogue : public UUserWidget
+class UIUTILS_API UMPMainDialogue : public UUserWidget
 {
 	GENERATED_BODY()
 	
