@@ -1,0 +1,12 @@
+[submodule "Plugins/EventRouter"]
+	path = Plugins/EventRouter
+	url = https://github.com/UnrealPlugin/EventRouter.git
+[submodule "Plugins/InteractionFramework"]
+	path = Plugins/InteractionFramework
+	url = https://github.com/UnrealPlugin/InteractionFramework.git
+[submodule "Plugins/Inventory"]
+	path = Plugins/Inventory
+	url = https://github.com/UnrealPlugin/Inventory.git
+[submodule "Plugins/UIUtils"]
+	path = Plugins/UIUtils
+	url = https://github.com/UnrealPlugin/UIUtils.git
