@@ -8,7 +8,7 @@ public class LoopIsland : ModuleRules
 	{
 		PCHUsage = PCHUsageMode.UseExplicitOrSharedPCHs;
 	
-		PublicDependencyModuleNames.AddRange(new string[] { 
+		PublicDependencyModuleNames.AddRange(new string[] {"ArticyRuntime", 
 			"Core", 
 			"CoreUObject", 
 			"Engine", 
