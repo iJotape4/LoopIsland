@@ -10,3 +10,6 @@
 [submodule "Plugins/UIUtils"]
 	path = Plugins/UIUtils
 	url = https://github.com/UnrealPlugin/UIUtils.git
+[submodule "Plugins/NarrativeCore"]
+	path = Plugins/NarrativeCore
+	url = https://github.com/UnrealPlugin/NarrativeCore.git
